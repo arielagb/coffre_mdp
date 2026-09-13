@@ -3,3 +3,4 @@
 *.salt
 vault*
 __pycache__/
+config.json
