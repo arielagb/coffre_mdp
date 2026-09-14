@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from etape3_storage import save_vault, load_vault
 from etape4_vault_logic import add_entry, update_entry, delete_entry, generate_password, MAX_CUSTOM_FIELDS
-
+from etape8_change_password import ChangePasswordWindow
 
 class MainWindow:
     def __init__(self, root, master_key, data):
@@ -22,6 +22,7 @@ class MainWindow:
         tk.Button(button_frame, text="Edit", command=self.open_edit_form).grid(row=0, column=1, padx=5)
         tk.Button(button_frame, text="Delete", command=self.delete_selected).grid(row=0, column=2, padx=5)
         tk.Button(button_frame, text="Show/Copy", command=self.show_selected).grid(row=0, column=3, padx=5)
+        tk.Button(button_frame, text="Change Password", command=self.open_change_password).grid(row=0, column=4, padx=5)
 
         self.refresh_list()
 
@@ -70,6 +71,12 @@ class MainWindow:
         if index is None:
             return
         EntryForm(self.root, self, mode="edit", index=index)
+    
+    def open_change_password(self):
+        dialog = ChangePasswordWindow(self.root, self.master_key, self.data)
+        self.root.wait_window(dialog.window)
+        if dialog.new_master_key:
+            self.master_key = dialog.new_master_key
 
 
 class EntryForm:
