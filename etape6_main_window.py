@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 from tkinter import messagebox
 from etape3_storage import save_vault, load_vault
 from etape4_vault_logic import add_entry, update_entry, delete_entry, generate_password, MAX_CUSTOM_FIELDS
@@ -15,14 +16,14 @@ class MainWindow:
         self.listbox = tk.Listbox(root, width=60, height=15)
         self.listbox.pack(padx=10, pady=10)
 
-        button_frame = tk.Frame(root)
+        button_frame = ttk.Frame(root)
         button_frame.pack(pady=5)
 
-        tk.Button(button_frame, text="Add", command=self.open_add_form).grid(row=0, column=0, padx=5)
-        tk.Button(button_frame, text="Edit", command=self.open_edit_form).grid(row=0, column=1, padx=5)
-        tk.Button(button_frame, text="Delete", command=self.delete_selected).grid(row=0, column=2, padx=5)
-        tk.Button(button_frame, text="Show/Copy", command=self.show_selected).grid(row=0, column=3, padx=5)
-        tk.Button(button_frame, text="Change Password", command=self.open_change_password).grid(row=0, column=4, padx=5)
+        ttk.Button(button_frame, text="Add", command=self.open_add_form).grid(row=0, column=0, padx=5)
+        ttk.Button(button_frame, text="Edit", command=self.open_edit_form).grid(row=0, column=1, padx=5)
+        ttk.Button(button_frame, text="Delete", command=self.delete_selected).grid(row=0, column=2, padx=5)
+        ttk.Button(button_frame, text="Show/Copy", command=self.show_selected).grid(row=0, column=3, padx=5)
+        ttk.Button(button_frame, text="Change Password", command=self.open_change_password).grid(row=0, column=4, padx=5)
 
         self.refresh_list()
 
@@ -89,26 +90,26 @@ class EntryForm:
         self.window = tk.Toplevel(parent)
         self.window.title("Add entry" if mode == "add" else "Edit entry")
 
-        tk.Label(self.window, text="Category:").grid(row=0, column=0, sticky="e")
-        self.category_entry = tk.Entry(self.window)
+        ttk.Label(self.window, text="Category:").grid(row=0, column=0, sticky="e")
+        self.category_entry = ttk.Entry(self.window)
         self.category_entry.grid(row=0, column=1)
 
-        tk.Label(self.window, text="Name:").grid(row=1, column=0, sticky="e")
-        self.name_entry = tk.Entry(self.window)
+        ttk.Label(self.window, text="Name:").grid(row=1, column=0, sticky="e")
+        self.name_entry = ttk.Entry(self.window)
         self.name_entry.grid(row=1, column=1)
 
-        tk.Label(self.window, text="Password:").grid(row=2, column=0, sticky="e")
-        self.password_entry = tk.Entry(self.window)
+        ttk.Label(self.window, text="Password:").grid(row=2, column=0, sticky="e")
+        self.password_entry = ttk.Entry(self.window)
         self.password_entry.grid(row=2, column=1)
-        tk.Button(self.window, text="Generate", command=self.fill_generated_password).grid(row=2, column=2)
+        ttk.Button(self.window, text="Generate", command=self.fill_generated_password).grid(row=2, column=2)
 
-        self.custom_fields_frame = tk.Frame(self.window)
+        self.custom_fields_frame = ttk.Frame(self.window)
         self.custom_fields_frame.grid(row=3, column=0, columnspan=3, pady=5)
 
-        self.add_field_button = tk.Button(self.window, text="+ Add custom field", command=self.add_custom_field_row)
+        self.add_field_button = ttk.Button(self.window, text="+ Add custom field", command=self.add_custom_field_row)
         self.add_field_button.grid(row=4, column=0, columnspan=3)
 
-        tk.Button(self.window, text="Save", command=self.save).grid(row=5, column=0, columnspan=3, pady=10)
+        ttk.Button(self.window, text="Save", command=self.save).grid(row=5, column=0, columnspan=3, pady=10)
 
         if mode == "edit":
             self.load_existing_data()
@@ -122,16 +123,16 @@ class EntryForm:
             messagebox.showwarning("Limit reached", f"Maximum {MAX_CUSTOM_FIELDS} custom fields.")
             return
 
-        row_frame = tk.Frame(self.custom_fields_frame)
+        row_frame = ttk.Frame(self.custom_fields_frame)
         row_frame.pack(pady=2)
 
-        field_name_entry = tk.Entry(row_frame, width=15)
+        field_name_entry = ttk.Entry(row_frame, width=15)
         field_name_entry.pack(side="left", padx=2)
 
-        field_value_entry = tk.Entry(row_frame, width=20)
+        field_value_entry = ttk.Entry(row_frame, width=20)
         field_value_entry.pack(side="left", padx=2)
 
-        remove_button = tk.Button(row_frame, text="x", command=lambda: self.remove_custom_field_row(row_frame))
+        remove_button = ttk.Button(row_frame, text="x", command=lambda: self.remove_custom_field_row(row_frame))
         remove_button.pack(side="left", padx=2)
 
         self.custom_field_rows.append((row_frame, field_name_entry, field_value_entry))

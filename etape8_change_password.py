@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 from tkinter import messagebox
 from etape1_cle import generate_salt, derive_key
 from etape3_storage import save_vault
@@ -14,22 +15,22 @@ class ChangePasswordWindow:
         self.window = tk.Toplevel(parent)
         self.window.title("Change master password")
 
-        tk.Label(self.window, text="Current password:").grid(row=0, column=0, sticky="e")
-        self.current_entry = tk.Entry(self.window, show="*")
+        ttk.Label(self.window, text="Current password:").grid(row=0, column=0, sticky="e")
+        self.current_entry = ttk.Entry(self.window, show="*")
         self.current_entry.grid(row=0, column=1)
-        tk.Button(self.window, text="👁", command=lambda: self.toggle_visibility(self.current_entry)).grid(row=0, column=2)
+        ttk.Button(self.window, text="👁", command=lambda: self.toggle_visibility(self.current_entry)).grid(row=0, column=2)
 
-        tk.Label(self.window, text="New password:").grid(row=1, column=0, sticky="e")
-        self.new_entry = tk.Entry(self.window, show="*")
+        ttk.Label(self.window, text="New password:").grid(row=1, column=0, sticky="e")
+        self.new_entry = ttk.Entry(self.window, show="*")
         self.new_entry.grid(row=1, column=1)
-        tk.Button(self.window, text="👁", command=lambda: self.toggle_visibility(self.new_entry)).grid(row=1, column=2)
+        ttk.Button(self.window, text="👁", command=lambda: self.toggle_visibility(self.new_entry)).grid(row=1, column=2)
 
-        tk.Label(self.window, text="Confirm new password:").grid(row=2, column=0, sticky="e")
-        self.confirm_entry = tk.Entry(self.window, show="*")
+        ttk.Label(self.window, text="Confirm new password:").grid(row=2, column=0, sticky="e")
+        self.confirm_entry = ttk.Entry(self.window, show="*")
         self.confirm_entry.grid(row=2, column=1)
-        tk.Button(self.window, text="👁", command=lambda: self.toggle_visibility(self.confirm_entry)).grid(row=2, column=2)
+        ttk.Button(self.window, text="👁", command=lambda: self.toggle_visibility(self.confirm_entry)).grid(row=2, column=2)
 
-        tk.Button(self.window, text="Change", command=self.on_change).grid(row=3, column=0, columnspan=3, pady=10)
+        ttk.Button(self.window, text="Change", command=self.on_change).grid(row=3, column=0, columnspan=3, pady=10)
 
     def toggle_visibility(self, entry_widget):
         if entry_widget.cget("show") == "*":

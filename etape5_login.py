@@ -2,7 +2,7 @@ import os
 import json
 import hashlib
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import ttk, messagebox
 from etape1_cle import generate_salt, derive_key
 
 CONFIG_FILE = "config.json"
@@ -38,13 +38,13 @@ class LoginWindow:
         self.root.title("Password Vault")
         self.master_key = None
 
-        self.label = tk.Label(root, text="")
+        self.label = ttk.Label(root, text="")
         self.label.pack(pady=10)
 
-        self.password_entry = tk.Entry(root, show="*")
+        self.password_entry = ttk.Entry(root, show="*")
         self.password_entry.pack(pady=5)
 
-        self.button = tk.Button(root, text="", command=self.on_submit)
+        self.button = ttk.Button(root, text="", command=self.on_submit)
         self.button.pack(pady=10)
 
         if config_exists():
